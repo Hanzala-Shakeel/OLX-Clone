@@ -145,7 +145,7 @@ function printHeader(user) {
     loginWrapper.setAttribute("onclick", "logOut()");
   } else {
     loginWrapperText.textContent = "Login";
-    loginWrapper.setAttribute("onclick", "login()");
+    loginWrapper.setAttribute("onclick", "navigateToLogin()");
   }
   loginWrapper.appendChild(loginWrapperText);
   const sellWrapper = document.createElement("p");
