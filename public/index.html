@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OLX</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/olx.css" />
+  </head>
+  <body>
+    <!--___________________________________________Navbar________________________________________________-->
+    <div class="header" id="header">
+      <div class="img-container">
+        <img
+          onclick="window.location.reload()"
+          src="images/olx_logo.png"
+          alt=""
+          style="cursor: pointer"
+        />
+        <img onclick="showAndHideNavbarOnSmallDevices()" class="hamb" src="images/hamb.png" alt="" />
+      </div>
+      <div class="container" id="parentNavbar">
+        <div onclick="showAndHideLocationList()" class="location-box">
+          <div class="select-location">
+            <p id="text">Select Your Location</p>
+            <i id="move-icon" class="fa-solid fa-chevron-down"></i>
+          </div>
+          <ul class="option-box" id="list">
+            <li class="option" onclick="selectLocation('See ads in all Pakistan')">
+              <i class="fa-solid fa-location-dot blue"></i>
+              <p class="blue">See ads in all Pakistan</p>
+            </li>
+            <hr />
+            <li class="option" onclick="selectLocation('Peshawar, Pakistan')">
+              <i class="fa-solid fa-location-dot"></i>
+              <p>Peshawar, Pakistan</p>
+            </li>
+            <li class="option" onclick="selectLocation('Quetta, Pakistan')">
+              <i class="fa-solid fa-location-dot"></i>
+              <p>Quetta, Pakistan</p>
+            </li>
+            <li
+              class="option"
+              onclick="selectLocation('Multan, Pakistan')"
+            >
+              <i class="fa-solid fa-location-dot"></i>
+              <p>Multan, Pakistan</p>
+            </li>
+            <li class="option" onclick="selectLocation('Islamabad, Pakistan')">
+              <i class="fa-solid fa-location-dot"></i>
+              <p>Islamabad, Pakistan</p>
+            </li>
+            <li class="option" onclick="selectLocation('Lahore, Pakistan')">
+              <i class="fa-solid fa-location-dot"></i>
+              <p>Lahore, Pakistan</p>
+            </li>
+            <li class="option" onclick="selectLocation('Hyderabad, Pakistan')">
+              <i class="fa-solid fa-location-dot"></i>
+              <p>Hyderabad, Pakistan</p>
+            </li>
+            <li class="option" onclick="selectLocation('Karachi, Pakistan')">
+              <i class="fa-solid fa-location-dot"></i>
+              <p>Karachi, Pakistan</p>
+            </li>
+          </ul>
+        </div>
+        <div class="search-container">
+          <div class="search-box">
+            <input
+              oninput="displayAvailableKeywords()"
+              onclick="searchInputOutlineAqua()"
+              type="text"
+              class="search"
+              id="search-box"
+              placeholder="Find Cars, Mobile Phones and more..."
+            />
+            <p><i class="fa-solid fa-magnifying-glass"></i></p>
+          </div>
+          <div class="search-div" id="search-div" style="display: none">
+            <ul id="keyword-list">
+              <!-- Keywords will be dynamically generated here -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--___________________________________________Navbar 2________________________________________________-->
+    <div class="navbar2-parent">
+      <div class="navbar2">
+        <ul>
+          <h5>All CATEGORIES</h5>
+          <i class="fa-solid fa-chevron-down move-icon"></i>
+          <li>Mobile Phones</li>
+          <li>Cars</li>
+          <li>Motorcycles</li>
+          <li>Houses</li>
+          <li>TV-Video-Audio</li>
+          <li>Tablets</li>
+          <li>Land & Plots</li>
+        </ul>
+      </div>
+    </div>
+
+    <!--___________________________________________Top image________________________________________________-->
+
+    <div class="top_image">
+      <img src="images/top.jpg" alt="" />
+    </div>
+    <!-- ___________________________________________Product________________________________________________  -->
+    <div class="product">
+      <!-- rows will be added here through javascript and each row has 4 post boxes. -->
+    </div>
+
+    <!-- _______________________________________download picture__________________________________ -->
+
+    <div class="download">
+      <img src="images/footar.jpg" class="images" />
+
+      <div class="text">
+        <h1>TRY THE OLX APP</h1>
+        <p>
+          Buy, sell and find just about anything using <br />
+          the app on your mobile.
+        </p>
+      </div>
+      <div class="download_store">
+        <p>GET YOUR APP TODAY</p>
+        <img src="images/play store.png" alt="" />
+      </div>
+    </div>
+
+    <hr />
+
+    <!-- ______________________________footer_______________________________________ -->
+
+    <div class="Main_footer">
+      <div class="footer">
+        <div class="footer_box">
+          <h2>POPULAR CATEGORIES</h2>
+          <p>Cars</p>
+          <p>Flats for rent</p>
+          <p>Mobile Phone</p>
+          <p>Jobs</p>
+        </div>
+        <div class="footer_box">
+          <h2>TRENDING SEARCHES</h2>
+          <p>Bikes</p>
+          <p>Watches</p>
+          <p>Books</p>
+          <p>Dogs</p>
+        </div>
+        <div class="footer_box">
+          <h2>ABOUT EMPG</h2>
+          <p>OLX Blog</p>
+          <p>Careers</p>
+          <p>Contact Us</p>
+          <p>OLX for Business</p>
+        </div>
+        <div class="footer_box">
+          <h2>Help</h2>
+          <p>Sitemap</p>
+          <p>Terms of use</p>
+          <p>Privacy Policy</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ______________________________footer 2_______________________________________ -->
+
+    <div class="footer2">
+      <p>Free Classifields in Pakistan .&copy; 2006-2022 OLX</p>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="js/init-firebase.js"></script>
+    <script src="js/olx.js"></script>
+  </body>
+</html>

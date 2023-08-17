@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="css/model.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="model-box">
+        <div class="model-image">
+          <img class="model-images" src="images/olx_logo.png" alt="" /><i
+            onclick="close1()"
+            class="fa-sharp fa-solid fa-xmark cross"
+          ></i>
+        </div>
+        <h2>WELCOME TO OLX</h2>
+        <p>
+          The trusted community of <br />
+          buyers and sellers.
+        </p>
+        <div onclick="login()" class="links">
+          <a href="#" class="google-link">
+            <img src="images/google.png" alt="" />Continue with Google
+          </a>
+          <a href="#" class="google-link">
+            <img src="images/facebook.svg" alt="" />Continue with Facebook
+          </a>
+          <a href="#" class="google-link">
+            <img src="images/mail.svg" alt="" />Continue with Email
+          </a>
+          <a href="#" class="google-link">
+            <img src="images/phone.svg" alt="" />Continue with Phone
+          </a>
+        </div>
+        <div class="privacy">
+          <p>By continuing, you are accepting</p>
+          <a href="#">OLX Terms and Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+    <script src="js/init-firebase.js"></script>
+    <script src="js/model.js"></script>
+  </body>
+</html>
