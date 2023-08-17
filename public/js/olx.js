@@ -157,7 +157,7 @@ function printHeader(user) {
   if (user) {
     sellWrapperText.setAttribute("onclick", "navigateToAdPost()");
   } else {
-    sellWrapperText.setAttribute("onclick", "navigateToLogin");
+    sellWrapperText.setAttribute("onclick", "navigateToLogin()");
   }
   sellWrapperText.textContent = "SELL";
   sellWrapperButton.appendChild(sellWrapperIcon);
