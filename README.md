@@ -26,7 +26,3 @@ Follow these steps to run the project locally:
    - Open the `js/firebase-init.js` file and ensure that it contains your Firebase configuration.
    - Enable Firebase Authentication, Firestore, and Storage in your Firebase project.
 4. Open `index.html` in a web browser.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
