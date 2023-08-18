@@ -23,6 +23,6 @@ Follow these steps to run the project locally:
 2. Navigate to the project directory.
 3. Set up your Firebase project:
    - Create a Firebase project at [https://console.firebase.google.com/](https://console.firebase.google.com/)
-   - Open the `js/firebase-init.js` file and ensure that it contains your Firebase configuration.
+   - Open the `public/js/firebase-init.js` file and ensure that it contains your Firebase configuration.
    - Enable Firebase Authentication, Firestore, and Storage in your Firebase project.
 4. Open `index.html` in a web browser.
