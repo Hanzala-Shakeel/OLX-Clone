@@ -6,7 +6,7 @@ const database = firebase.firestore();
 
 let loginUser, postData = [];
 let parentNavbar = document.getElementById("parentNavbar");
-let Locationlist = document.getElementById("list");
+let locationList = document.getElementById("list");
 let move_icon = document.getElementById("move-icon");
 let searchInput = document.getElementById("search-box");
 let product = document.querySelector(".product");
@@ -22,7 +22,7 @@ let selectedLocation = ""; // Global variable to store the selected location
 let unsubscribe;
 
 function showAndHideLocationList() {
-  Locationlist.classList.toggle("show");
+  locationList.classList.toggle("show");
   move_icon.classList.toggle("rotate");
 }
 
@@ -99,7 +99,7 @@ function showAndHideNavbarOnSmallDevices() {
     searchDiv.style.display = "none";
   }
   if (!parentNavbar.classList.contains("active")) {
-    Locationlist.classList.remove("show");
+    locationList.classList.remove("show");
     move_icon.classList.remove("rotate");
     hamburgerImage.src = "images/hamb.png";
   }
