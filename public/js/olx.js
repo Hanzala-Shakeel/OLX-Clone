@@ -87,7 +87,7 @@ function logOut() {
 }
 
 function navigateToAdPost() {
-  window.location.href = "addpost.html";
+  window.location.href = "adpost.html";
 }
 
 function showAndHideNavbarOnSmallDevices() {
@@ -226,16 +226,16 @@ function getAllPosts(data) {
 
   // Check if the post belongs to the current user and add "My Ad" tag
   if (data?.user_id == loginUser?.uid) {
-    const myAdd = document.createElement("p");
-    myAdd.setAttribute("class", "myAd");
-    myAdd.textContent = "My Ad";
-    postInnerWrapperSecond.appendChild(myAdd);
+    const myAd = document.createElement("p");
+    myAd.setAttribute("class", "myAd");
+    myAd.textContent = "My Ad";
+    postInnerWrapperSecond.appendChild(myAd);
   }
 
-  // Add click event to the post to store its ID in localStorage and redirect to the addpage.html
+  // Add click event to the post to store its ID in localStorage and redirect to the adpage.html
   postWrapper.addEventListener("click", () => {
     localStorage.setItem("postId", postWrapper.id);
-    window.location.href = "addpage.html";
+    window.location.href = "adpage.html";
   });
   let postTitles = data.postTitle;
   postTitleArray.push(postTitles);

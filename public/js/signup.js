@@ -11,15 +11,15 @@ function signup(e) {
   const password = document.getElementById("password");
 
   if (name.value === "") {
-    alert("Please enter your name");
+    swal("Please enter your name");
     return;
   }
   if (email.value === "") {
-    alert("Please enter your email");
+    swal("Please enter your email");
     return;
   }
   if (password.value === "") {
-    alert("Please enter your password");
+    swal("Please enter your password");
     return;
   }
 
@@ -56,7 +56,7 @@ function signup(e) {
             function () {
               let check = localStorage.getItem("check");
               if (check) {
-                window.location.href = "addpage.html";
+                window.location.href = "adpage.html";
                 localStorage.removeItem("check");
               } else {
                 window.location.href = "index.html";

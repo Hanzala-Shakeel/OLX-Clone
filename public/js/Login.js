@@ -9,11 +9,11 @@ function loginUser(e) {
   const password = document.getElementById("password");
 
   if (email.value == "") {
-    alert("Please enter your email");
+    swal("Please enter your email");
     return;
   }
   if (password.value == "") {
-    alert("Please enter your password");
+    swal("Please enter your password");
     return;
   }
 
@@ -38,7 +38,7 @@ function loginUser(e) {
         function () {
           let check = localStorage.getItem("check");
           if (check) {
-            window.location.href = "addpage.html";
+            window.location.href = "adpage.html";
             localStorage.removeItem("check");
           } else {
             window.location.href = "index.html";

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ad Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <link rel="stylesheet" href="css/adpage.css" />
+  </head>
+  <body>
+    <!-- HTML -->
+    <div class="navigation-bar">
+      <div><i onclick="navigateToHome()" class="fa-solid fa-arrow-left"></i><img src="images/olx_logo.png" alt=""></div>
+  </div>
+    <div class="header my-5">
+      <div class="post-details my-3">
+        <div id="imageCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+          <div class="carousel-inner" id="carouselInner">
+            <!-- Images will be dynamically added here -->
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <div class="post-title-box">
+          <div class="post-price mx-4 mt-3 mb-2">
+            <h1></h1>
+            <div class="icons"></div>
+          </div>
+          <div class="post-title mx-4">
+            <h4></h4>
+          </div>
+          <div class="user-location my-3 mx-4">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1024 1024" class="cc9ef69b"><path d="M512 85.33c211.75 0 384 172.27 384 384 0 200.58-214.8 392.34-312.66 469.34H440.68C342.83 861.67 128 669.9 128 469.33c0-211.73 172.27-384 384-384zm0 85.34c-164.67 0-298.67 133.97-298.67 298.66 0 160.02 196.89 340.53 298.46 416.6 74.81-56.72 298.88-241.32 298.88-416.6 0-164.69-133.98-298.66-298.67-298.66zm0 127.99c94.1 0 170.67 76.56 170.67 170.67s-76.56 170.66-170.66 170.66-170.67-76.56-170.67-170.66S417.9 298.66 512 298.66zm0 85.33c-47.06 0-85.33 38.28-85.33 85.34s38.27 85.33 85.34 85.33 85.33-38.27 85.33-85.33-38.27-85.34-85.33-85.34z"></path></svg>Model Town, Lahore</p>
+          </div>
+        </div>
+        <div class="post-details-box my-4">
+          <div class="mx-4 my-3"><h3>Details</h3></div>
+            <div class="post-brand-price mx-4">
+                <div class="post-brand">
+                  <p>Brand</p>
+                  <p class="bold"></p>
+                </div>
+                <div class="post-price-section">
+                  <p>Price</p>
+                  <p class="bold"></p>
+                </div>
+            </div>
+        </div>
+        <div class="post-description-box">
+          <div class="mx-4 my-3"><h3>Description</h3></div>
+            <div class="description-text px-4">
+              <p></p>
+            </div>
+        </div>
+      </div>
+      <div class="user-details-parent my-3 mx-3">
+        <div class="user-details">
+          <div class="user-image my-3">
+            <img src="images/pic3.png" alt="">
+          </div>
+          <div class="user-info mx-3 my-3">
+            <p class="bold my-3"></p>
+          </div>
+        </div>
+        <div class="user-btn mb-5">
+          <button><svg width="26" height="26" viewBox="0 0 1024 1024" class="b32fb7b2"><path d="M784.55 852.4c-331.43-14.64-598.31-281.52-612.94-612.95l149.97-60 91.69 183.43-71 35.5v26.45c0 141.66 115.25 256.9 256.9 256.9h26.45l11.86-23.64 23.68-47.36 183.38 91.74-59.99 149.93zM918.1 643.45L661.16 514.99l-57.47 19.2-30.04 60.03c-74.07-11.1-132.73-69.8-143.87-143.87l60.08-30.04L509 362.88 380.6 105.94l-54.2-20.6-214.18 85.63-26.88 39.8c0 401.37 326.57 727.9 727.94 727.9l39.76-26.88 85.64-214.19-20.61-54.19z"></path></svg><p>Show phone number</p></button>
+        </div>
+        <hr>
+        <div class="user-location mx-3">
+          <h4>Location</h4>
+          <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1024 1024" class="cc9ef69b"><path d="M512 85.33c211.75 0 384 172.27 384 384 0 200.58-214.8 392.34-312.66 469.34H440.68C342.83 861.67 128 669.9 128 469.33c0-211.73 172.27-384 384-384zm0 85.34c-164.67 0-298.67 133.97-298.67 298.66 0 160.02 196.89 340.53 298.46 416.6 74.81-56.72 298.88-241.32 298.88-416.6 0-164.69-133.98-298.66-298.67-298.66zm0 127.99c94.1 0 170.67 76.56 170.67 170.67s-76.56 170.66-170.66 170.66-170.67-76.56-170.67-170.66S417.9 298.66 512 298.66zm0 85.33c-47.06 0-85.33 38.28-85.33 85.34s38.27 85.33 85.34 85.33 85.33-38.27 85.33-85.33-38.27-85.34-85.33-85.34z"></path></svg>Model Town, Lahore</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <p>Free Classifields in Pakistan .&copy; 2006-2022 OLX</p>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="js/init-firebase.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="js/adpage.js"></script>
+  </body>
+</html>
