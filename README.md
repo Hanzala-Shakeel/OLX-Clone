@@ -12,7 +12,7 @@ OLX Clone is a web application that replicates the basic functionalities of the 
 
 ## Tech Stack
 
-- Frontend: HTML, CSS, JavaScript
+- Frontend: HTML, CSS, Bootstrap, JavaScript
 - Backend: Firebase (Authentication, Firestore, and Storage)
 
 ## Getting Started
