@@ -1,6 +1,8 @@
 // JavaScript
 const postId = localStorage.getItem("postId");
 const database = firebase.firestore();
+// Access Firebase Storage
+const storage = firebase.storage();
 let = postData = [];
 window.addEventListener("load", () => {
   const auth = firebase.auth();
@@ -125,6 +127,39 @@ function navigateToHome() {
   window.location.href = "index.html";
 }
 
+// function deleteIcon() {
+//   swal({
+//     title: "Are you sure?",
+//     text: "This action cannot be undone.",
+//     type: "warning",
+//     showCancelButton: true,
+//     confirmButtonColor: "#DD6B55",
+//     confirmButtonText: "Delete",
+//     cancelButtonText: "Cancel",
+//     closeOnConfirm: false,
+//     closeOnCancel: true
+//   }, function (isConfirmed) {
+//     if (isConfirmed) {
+//       database
+//         .collection("post")
+//         .doc(postId)
+//         .delete()
+//         .then(() => {
+//           swal({
+//             title: "Congrats!",
+//             text: "Document successfully deleted!",
+//             type: "success"
+//           }, function () {
+//             window.location.href = "index.html";
+//           });
+//         })
+//         .catch((error) => {
+//           console.error("Error removing document: ", error);
+//         });
+//     }
+//   });
+// }
+
 function deleteIcon() {
   swal({
     title: "Are you sure?",
@@ -138,21 +173,71 @@ function deleteIcon() {
     closeOnCancel: true
   }, function (isConfirmed) {
     if (isConfirmed) {
+      // Get the document data
       database
         .collection("post")
         .doc(postId)
-        .delete()
-        .then(() => {
-          swal({
-            title: "Congrats!",
-            text: "Document successfully deleted!",
-            type: "success"
-          }, function () {
-            window.location.href = "index.html";
-          });
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            const data = doc.data();
+            const imageUrls = data.postImages;
+
+            // Check if imageUrls is a string or an array
+            if (typeof imageUrls === "string") {
+              // Delete single image
+              const imageRef = storage.refFromURL(imageUrls);
+              imageRef.delete()
+                .then(() => {
+                  // Image deleted, now delete the document
+                  return database.collection("post").doc(postId).delete();
+                })
+                .then(() => {
+                  swal({
+                    title: "Congrats!",
+                    text: "Document successfully deleted!",
+                    type: "success"
+                  }, function () {
+                    window.location.href = "index.html";
+                  });
+                })
+                .catch((error) => {
+                  console.error("Error deleting image or document: ", error);
+                });
+            } else if (Array.isArray(imageUrls)) {
+              // postImages is an array, delete each image
+              const deleteImagePromises = imageUrls.map((imageUrl) => {
+                const imageRef = storage.refFromURL(imageUrl);
+                return imageRef.delete();
+              });
+
+              // After all images are deleted, delete the document
+              Promise.all(deleteImagePromises)
+                .then(() => {
+                  // All images deleted, now delete the document
+                  return database.collection("post").doc(postId).delete();
+                })
+                .then(() => {
+                  swal({
+                    title: "Congrats!",
+                    text: "Document successfully deleted!",
+                    type: "success"
+                  }, function () {
+                    window.location.href = "index.html";
+                  });
+                })
+                .catch((error) => {
+                  console.error("Error deleting images or document: ", error);
+                });
+            } else {
+              console.error("postImages is neither a string nor an array");
+            }
+          } else {
+            console.log("No document found with ID:", postId);
+          }
         })
         .catch((error) => {
-          console.error("Error removing document: ", error);
+          console.error("Error getting document:", error);
         });
     }
   });

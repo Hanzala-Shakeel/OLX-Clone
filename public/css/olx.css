@@ -25,15 +25,16 @@
   align-items: center;
   position: relative;
   transition: all 0.3s ease-in;
-  z-index: -200;
+  z-index: 2;
 }
 
 .login-button {
-  margin-left: 60px;
+  /* margin-left: 60px; */
+  margin-left: 50px;
 }
 
 .login-button p {
-  text-decoration: underline;
+  /* text-decoration: underline; */
   cursor: pointer;
   font-size: 17px;
   color: rgb(0, 0, 0);
@@ -45,7 +46,8 @@
 
 .location-box {
   width: 250px;
-  margin-left: 70px;
+  /* margin-left: 70px; */
+  margin-left: 60px;
 }
 
 .select-location i {
@@ -95,7 +97,6 @@ option i {
   background-color: white;
   display: none;
   position: absolute;
-  top: 43px;
 }
 
 .show {
@@ -109,6 +110,7 @@ option i {
 .search-box {
   display: flex;
   margin-left: 30px;
+  /* margin: 0 30px; */
 }
 
 .search-box i {
@@ -121,15 +123,16 @@ option i {
 
 .search {
   padding: 10px;
-  width: 570px;
+  /* width: 570px; */
+  width: 480px;
   font-size: 15px;
   border: 2px solid black;
   border-radius: 6px 0 0 6px;
-  /* outline: none; */
 }
 
 .sell_button button {
-  margin-left: 70px;
+  /* margin-left: 70px; */
+  margin-left: 55px;
   border-style: solid;
   border-width: 5px;
   border-top-color: #23e5db;
@@ -159,7 +162,8 @@ option i {
 }
 
 .navbar2 {
-  width: 1299px;
+  /* width: 1299px; */
+  width: 1275px;
 }
 
 .navbar2 ul {
@@ -177,10 +181,10 @@ option i {
   padding: 0 10px;
 }
 
-.navbar2 ul li:hover {
+/* .navbar2 ul li:hover {
   color: #00a49f;
   transition: 0.3s;
-}
+} */
 
 /* ___________________________________________Top image________________________________________________ */
 
@@ -210,7 +214,8 @@ option i {
 }
 
 .box img {
-  max-height: 154px;
+  /* max-height: 154px; */
+  height: 100%;
   width: 100%;
   object-fit: cover;
 }
@@ -250,6 +255,7 @@ option i {
 .myAd {
   font-size: 16px !important;
   font-weight: 700;
+  margin-left: 30px;
 }
 
 /* _______________________________Download_picture______________________________________  */
@@ -342,19 +348,27 @@ option i {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 20vh;
+  /* height: 20vh; */
+  height: 42vh;
+  flex-direction: column;
+  gap: 25px;
+}
+.notFoundImg{
+  width: 65px;
 }
 /* ___________________________Search-Div________________________________________________ */
 
 .search-div {
   position: absolute;
-  width: 570px;
+  /* width: 570px; */
+  width: 480px;
   margin-left: 30px;
   overflow-y: auto;
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.12), 0 6px 6px 0 rgba(0, 0, 0, 0.24);
   max-height: 400px;
+  z-index: 2;
 }
 .search-div li {
   list-style: none;
@@ -368,27 +382,99 @@ option i {
   background-color: #c8f8f6;
 }
 
-@media screen and (max-width: 912px) {
+.myAdDiv {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 30px;
+  visibility: hidden;
+}
+
+.myAdImg {
+  width: 23px !important;
+  margin-right: 5px;
+}
+.product {
+  min-height: 280px;
+  position: relative;
+  z-index: 1;
+}
+
+@media screen and (max-width: 1300px) {
+  /* header */
+  .location-box {
+    width: 230px;
+    margin-left: 40px;
+  }
+  .option {
+    width: 230px;
+  }
+  .search {
+    width: 450px;
+  }
+  .search-div {
+    width: 450px;
+  }
+  .search-box {
+    margin-left: 25px;
+  }
+  .login-button {
+    margin-left: 30px;
+  }
+  .sell_button button {
+    margin-left: 30px;
+  }
+  /* navbar2 */
+  .navbar2-parent {
+    padding: 0 55px;
+  }
+  /* product */
+  .First_row {
+    width: 100%;
+  }
+  .box {
+    width: 275px;
+  }
+  .footer {
+    justify-content: space-evenly;
+  }
+  .top_image img {
+    width: 100%;
+  }
+}
+/* pehle 912 thi  */
+@media screen and (max-width: 1182px) {
   .header {
-    display: block;
+    position: static;
+    margin-bottom: 105px;
+    box-shadow: none;
+    background-color: white;
   }
   .container {
+    position: fixed;
     display: flex;
-    background-color: #3a77ff;
+    /* background-color: #3a77ff; */
+    background-color: #fff;
     height: 250px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    top: -250px;
+    /* top: -110px; */
+    top: -200px;
+    width: 100%;
+    box-shadow: 0 0 2px grey;
+    gap: 18px;
   }
   .location-box {
     margin: 10px 0;
   }
   .search-box {
-    margin: 10px 0;
+    margin: 10px 0 0 0;
   }
   .search {
     width: 305px;
+    font-size: 0.9rem;
   }
   .login-button {
     margin: 10px 0;
@@ -400,31 +486,61 @@ option i {
     margin: 10px 0;
   }
   .option-box {
-    top: 65px;
+    z-index: 100;
   }
   .hamb {
-    width: 40px !important;
+    width: 30px !important;
     display: block;
   }
   .img-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 100%;
     background-color: #f7f8f9;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    height: 50px;
+    width: 100%;
+    box-shadow: 0 0 2px grey;
+  }
+  .top_image {
+    display: none;
   }
   .active {
-    top: 0;
+    /* top: 141px; */
+    top: 50px;
   }
   .product {
     margin-top: 40px;
+    overflow: hidden;
+    padding: 0 13px;
   }
   .First_row {
-    flex-wrap: wrap;
-    width: 100%;
+    overflow: scroll;
+    max-width: 100%;
+    gap: 15px;
+    /* justify-content: unset; */
   }
   .box {
     margin-top: 30px;
+    min-width: 213px;
+    width: unset;
+  }
+  .img-box {
+    height: 106px;
+  }
+  .img-box img {
+    max-height: 106px;
+  }
+  .box p {
+    font-size: 13px;
+  }
+  .box h2 {
+    font-size: 16px;
+  }
+  .box .addres_data p {
+    font-size: 12px;
   }
   .footer2 {
     margin-top: 30px;
@@ -447,7 +563,7 @@ option i {
     display: block;
   }
   .images {
-    width: 100%;
+    max-width: 100%;
   }
   .Main_footer {
     display: none;
@@ -458,5 +574,174 @@ option i {
   .search-div {
     margin-left: 0px;
     width: 305px;
+  }
+  .First_row::-webkit-scrollbar {
+    display: none;
+  }
+  .First_row {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .location-box {
+    position: absolute;
+    top: 75px;
+  }
+  .search-container {
+    position: absolute;
+    top: 141px;
+  }
+  .header img {
+    width: 55px;
+  }
+  .location-box {
+    font-size: 0.9rem;
+  }
+  /* .search-box input {
+    border-radius: 6px 6px;
+  } */
+  /* .search-container i {
+    display: none;
+  } */
+  .login-button {
+    display: flex;
+    justify-content: center;
+    padding: 13px 20px;
+    width: 90%;
+    cursor: pointer;
+    background-color: #002f34;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    border: none;
+    font-size: 15px;
+  }
+  .text h1 {
+    font-size: 20px;
+  }
+  .text p {
+    padding: 10px 31px 18px 20px;
+    font-size: 16px;
+  }
+  .download_store {
+    padding-left: 20px;
+  }
+  .download_store p {
+    font-size: 18px;
+  }
+  .download_store img {
+    width: 110px;
+    padding-left: 0px;
+  }
+  .myAdDiv {
+    margin-left: 0;
+  }
+  .myAd {
+    font-size: 14px !important;
+    margin-left: 0px;
+  }
+}
+
+.loader {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+  /* position: fixed; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* margin-top: -30px; Negative half of height */
+  margin-left: -30px; /*Negative half of width*/
+  /* z-index: 9999; Ensure it's above other elements */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hide loader when posts are loaded */
+.loader.hidden {
+  display: none;
+}
+
+@media screen and (max-width: 920px){
+  .First_row{
+    justify-content: unset;
+  }
+}
+
+/* my device width 359 */
+
+@media screen and (max-width: 450px) {
+  .header img {
+    width: 50px;
+  }
+  .hamb {
+    width: 25px !important;
+  }
+  .search {
+    width: 75vw;
+  }
+  .search-div {
+    width: 86vw;
+  }
+  .product {
+    margin-top: 135px;
+  }
+  .box {
+    margin-top: 0px;
+  }
+  .location-box {
+    font-size: 0.8rem;
+  }
+  .select-location {
+    height: 40px;
+  }
+  .search {
+    height: 40px;
+    font-size: 12px;
+  }
+  .search-box i {
+    padding: 13px;
+    font-size: 14px;
+  }
+  .search-div li {
+    font-size: 13px;
+  }
+  .text h1 {
+    font-size: 17px;
+  }
+  .text p {
+    font-size: 14px;
+  }
+  .download_store p {
+    font-size: 15px;
+  }
+  .download_store img {
+    width: 95px;
+  }
+  .footer2 p {
+    font-size: 13px;
+  }
+  .login-button p {
+    font-size: 15px;
+  }
+  .sell_button button {
+    font-size: 14px;
+    cursor: pointer;
+    color: black;
+  }
+  .myAdDiv {
+    font-size: 15px;
+  }
+  .First_row{
+    justify-content: unset;
   }
 }

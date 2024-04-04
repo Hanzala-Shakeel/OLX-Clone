@@ -9,7 +9,7 @@
 .navbar {
   width: 100%;
   height: 60px;
-  background-color: aliceblue;
+  /* background-color: aliceblue; */
 }
 
 .navbar img {
@@ -88,6 +88,7 @@
   outline-color: aqua;
   border-radius: 3px;
   border: 1px solid black;
+  font-size: 14px;
 }
 
 .message2 {
@@ -225,6 +226,9 @@
   padding: 15px 30px;
   cursor: pointer;
 }
+.ads-location-dropdown ol {
+  padding: 15px 30px;
+}
 
 .ads-location-dropdown ul li:hover {
   background-color: #c8f8f6;
@@ -316,11 +320,184 @@
   transition: 0.3s;
 }
 
-@media screen and (max-width: 428px) {
-  .add-form {
-    width: 85%;
+/* Modal container */
+.modal {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  /* display: flex; Flexbox layout for centering */
+  display: none;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+}
+
+/* Modal content */
+.modal-content {
+  /* background: #595bd4; */
+  padding: 20px;
+  border-radius: 10px;
+  animation: slideIn 0.5s forwards; /* Slide-in animation */
+  display: flex;
+  justify-content: center;
+}
+
+/* Modal slide-in animation */
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
   }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Loading animation */
+.loading {
+  position: absolute;
+  /* width: 100px; */
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  margin: auto;
+  transform: translateY(-50%);
+}
+
+.loading span {
+  position: absolute;
+  height: 10px;
+  width: 84px;
+  top: 50px;
+  overflow: hidden;
+}
+
+.loading span > i {
+  position: absolute;
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  animation: wait 4s infinite;
+}
+
+.loading span > i:nth-of-type(1) {
+  left: -28px;
+  background: yellow;
+}
+
+.loading span > i:nth-of-type(2) {
+  left: -21px;
+  animation-delay: 0.8s;
+  background: lightgreen;
+}
+
+@keyframes wait {
+  0% {
+    left: -7px;
+  }
+  30% {
+    left: 52px;
+  }
+  60% {
+    left: 22px;
+  }
+  100% {
+    left: 100px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .add-form {
+    width: 90%;
+  }
+  h3 {
+    font-size: 15px;
+  }
+  p {
+    font-size: 11px;
+  }
+  .include-details p {
+    margin: 5px 34px 3px 9px;
+  }
+  .description p {
+    margin: 30px 34px 3px 9px;
+  }
+  .description span {
+    margin: 5px 34px 0px 9px;
+    font-size: 11px;
+  }
+  .set-price-box p {
+    margin: 30px 0px 3px 9px;
+  }
+  .ads-location p {
+    margin: 30px 0px 3px 9px;
+  }
+  .ads-location-input {
+    width: 95%;
+    height: 45px;
+  }
+  .location-input {
+    font-size: 15px;
+  }
+  /* .ads-location-dropdown {
+    width: 89%;
+    height: fit-content;
+    box-shadow: 0 0 10px grey;
+  } */
   .ads-location-dropdown {
-    width: 81%;
+    width: 84%;
+    height: fit-content;
+    box-shadow: 3px 3px 8px gray;
+  }
+  .ads-location-dropdown ul li {
+    padding: 11px 30px;
+    font-size: 15px;
+  }
+  .user-img-box {
+    align-items: center;
+  }
+  .user-img-box img {
+    width: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .description-input {
+    font-size: 13px;
+  }
+  #move-icon {
+    font-size: 13px;
+  }
+  ol {
+    padding: 11px 30px;
+  }
+  input {
+    height: 40px;
+  }
+  .btn {
+    width: 100px;
+    height: 40px;
+    font-size: 14px;
+  }
+  .verify-div p {
+    margin: 30px 0px 5px 9px;
+  }
+  .navbar img {
+    width: 45px;
+  }
+  .photo {
+    width: 75px;
+    height: 75px;
+  }
+  .upload-photos p {
+    font-size: 11px !important;
+  }
+  .navbar i {
+    font-size: 20px;
   }
 }

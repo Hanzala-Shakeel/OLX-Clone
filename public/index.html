@@ -16,82 +16,99 @@
     <div class="header" id="header">
       <div class="img-container">
         <img
-          onclick="window.location.reload()"
+          id="reloadAdsImage"
           src="images/olx_logo.png"
           alt=""
           style="cursor: pointer"
         />
-        <img onclick="showAndHideNavbarOnSmallDevices()" class="hamb" src="images/hamb.png" alt="" />
+        <img
+          onclick="showAndHideNavbarOnSmallDevices()"
+          class="hamb"
+          src="images/hamb.png"
+          alt=""
+        />
       </div>
-      <div class="container" id="parentNavbar">
-        <div onclick="showAndHideLocationList()" class="location-box">
-          <div class="select-location">
-            <p id="text">Select Your Location</p>
-            <i id="move-icon" class="fa-solid fa-chevron-down"></i>
-          </div>
-          <ul class="option-box" id="list">
-            <li class="option" onclick="selectLocation('See ads in all Pakistan')">
-              <i class="fa-solid fa-location-dot blue"></i>
-              <p class="blue">See ads in all Pakistan</p>
-            </li>
-            <hr />
-            <li class="option" onclick="selectLocation('Peshawar, Pakistan')">
-              <i class="fa-solid fa-location-dot"></i>
-              <p>Peshawar, Pakistan</p>
-            </li>
-            <li class="option" onclick="selectLocation('Quetta, Pakistan')">
-              <i class="fa-solid fa-location-dot"></i>
-              <p>Quetta, Pakistan</p>
-            </li>
-            <li
-              class="option"
-              onclick="selectLocation('Multan, Pakistan')"
-            >
-              <i class="fa-solid fa-location-dot"></i>
-              <p>Multan, Pakistan</p>
-            </li>
-            <li class="option" onclick="selectLocation('Islamabad, Pakistan')">
-              <i class="fa-solid fa-location-dot"></i>
-              <p>Islamabad, Pakistan</p>
-            </li>
-            <li class="option" onclick="selectLocation('Lahore, Pakistan')">
-              <i class="fa-solid fa-location-dot"></i>
-              <p>Lahore, Pakistan</p>
-            </li>
-            <li class="option" onclick="selectLocation('Hyderabad, Pakistan')">
-              <i class="fa-solid fa-location-dot"></i>
-              <p>Hyderabad, Pakistan</p>
-            </li>
-            <li class="option" onclick="selectLocation('Karachi, Pakistan')">
-              <i class="fa-solid fa-location-dot"></i>
-              <p>Karachi, Pakistan</p>
-            </li>
+      <div onclick="showAndHideLocationList()" class="location-box">
+        <div class="select-location">
+          <p id="text">Select Your Location</p>
+          <i id="move-icon" class="fa-solid fa-chevron-down"></i>
+        </div>
+        <ul class="option-box" id="list">
+          <li
+            class="option"
+            onclick="selectLocation('See ads in all Pakistan')"
+          >
+            <i class="fa-solid fa-location-dot blue"></i>
+            <p class="blue">See ads in all Pakistan</p>
+          </li>
+          <hr />
+          <li class="option" onclick="selectLocation('Peshawar, Pakistan')">
+            <i class="fa-solid fa-location-dot"></i>
+            <p>Peshawar, Pakistan</p>
+          </li>
+          <li class="option" onclick="selectLocation('Quetta, Pakistan')">
+            <i class="fa-solid fa-location-dot"></i>
+            <p>Quetta, Pakistan</p>
+          </li>
+          <li class="option" onclick="selectLocation('Multan, Pakistan')">
+            <i class="fa-solid fa-location-dot"></i>
+            <p>Multan, Pakistan</p>
+          </li>
+          <li class="option" onclick="selectLocation('Islamabad, Pakistan')">
+            <i class="fa-solid fa-location-dot"></i>
+            <p>Islamabad, Pakistan</p>
+          </li>
+          <li class="option" onclick="selectLocation('Lahore, Pakistan')">
+            <i class="fa-solid fa-location-dot"></i>
+            <p>Lahore, Pakistan</p>
+          </li>
+          <li class="option" onclick="selectLocation('Hyderabad, Pakistan')">
+            <i class="fa-solid fa-location-dot"></i>
+            <p>Hyderabad, Pakistan</p>
+          </li>
+          <li class="option" onclick="selectLocation('Karachi, Pakistan')">
+            <i class="fa-solid fa-location-dot"></i>
+            <p>Karachi, Pakistan</p>
+          </li>
+        </ul>
+      </div>
+      <div class="search-container">
+        <div class="search-box">
+          <input
+            oninput="displayAvailableKeywords()"
+            onclick="searchInputOutlineAqua()"
+            type="text"
+            class="search"
+            id="search-box"
+            placeholder="Find Cars, Mobile Phones and more..."
+          />
+          <p><i class="fa-solid fa-magnifying-glass"></i></p>
+        </div>
+        <div class="search-div" id="search-div" style="display: none">
+          <ul id="keyword-list">
+            <!-- Keywords will be dynamically generated here -->
           </ul>
         </div>
-        <div class="search-container">
-          <div class="search-box">
-            <input
-              oninput="displayAvailableKeywords()"
-              onclick="searchInputOutlineAqua()"
-              type="text"
-              class="search"
-              id="search-box"
-              placeholder="Find Cars, Mobile Phones and more..."
-            />
-            <p><i class="fa-solid fa-magnifying-glass"></i></p>
-          </div>
-          <div class="search-div" id="search-div" style="display: none">
-            <ul id="keyword-list">
-              <!-- Keywords will be dynamically generated here -->
-            </ul>
-          </div>
+      </div>
+      <div class="container" id="parentNavbar">
+        <div id="showads" class="myAdDiv">
+          <img class="myAdImg" src="images/myAdIcon.svg" alt="" />
+          <p>My Ads</p>
         </div>
+        <div class="login-button"><p class="loginText">LogOut</p></div>
+        <p class="sell_button">
+          <button class="sellWrapper">
+            <i class="fa-regular fa-plus"></i>
+            <p>SELL</p>
+          </button>
+        </p>
       </div>
     </div>
     <!--___________________________________________Navbar 2________________________________________________-->
     <div class="navbar2-parent">
       <div class="navbar2">
         <ul>
+          <!-- <h5 id="showads">Show My Ads Only</h5> -->
           <h5>All CATEGORIES</h5>
           <i class="fa-solid fa-chevron-down move-icon"></i>
           <li>Mobile Phones</li>
@@ -113,6 +130,8 @@
     <!-- ___________________________________________Product________________________________________________  -->
     <div class="product">
       <!-- rows will be added here through javascript and each row has 4 post boxes. -->
+      <!-- Loader element -->
+      <div class="loader" id="loader"></div>
     </div>
 
     <!-- _______________________________________download picture__________________________________ -->

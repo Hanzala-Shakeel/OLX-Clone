@@ -14,9 +14,13 @@ let bodyPostWrapper = document.createElement("div");
 bodyPostWrapper.setAttribute("class", "First_row");
 let noAdMessage = document.createElement("div");
 noAdMessage.setAttribute("class", "no-ad-message");
-let noAdMessageh1 = document.createElement("h1");
+let noAdMessageh1 = document.createElement("h3");
 noAdMessageh1.textContent = "No ads found for this location";
+let noAdMessageImg = document.createElement("img");
+noAdMessageImg.setAttribute("class", "notFoundImg");
+noAdMessageImg.src = "images/iconNotFound.webp";
 noAdMessage.appendChild(noAdMessageh1);
+noAdMessage.appendChild(noAdMessageImg);
 let postTitleArray = [];
 let selectedLocation = ""; // Global variable to store the selected location
 let unsubscribe;
@@ -38,37 +42,59 @@ function selectLocation(location) {
   }
   filterAdsByLocation();
   searchInput.value = "";
+  hideSearchDiv();
 }
 
 function filterAdsByLocation() {
-  // Get all the post elements
-  const postElements = document.querySelectorAll(".box");
+  // Clear existing posts
+  product.innerHTML = "";
+  postData = [];
+  postTitleArray = [];
+  // Get the reference to the "post" collection
+  const postCollection = database.collection("post");
 
-  let adsFound = false;
+  // Check if a location is selected
+  if (selectedLocation === "") {
+    // If no location is selected, fetch all ads
+    postCollection.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const dataFromFirebase = doc.data();
+        if (dataFromFirebase) {
+          getAllPosts(dataFromFirebase);
+        }
+      });
 
-  // Loop through each post element and check if the location matches the selected location
-  postElements.forEach((postElement) => {
-    const postLocationElement = postElement.querySelector(".addres_data p");
-    if (
-      selectedLocation === "" ||
-      postLocationElement.textContent === selectedLocation
-    ) {
-      // Show the ad if no location is selected or if it matches the selected location
-      postElement.style.display = "block";
-      adsFound = true;
-    } else {
-      // Hide the ad if it doesn't match the selected location
-      postElement.style.display = "none";
-    }
-  });
-  // If no ads are found for the selected location, display the message
-  if (!adsFound) {
-    product.appendChild(noAdMessage);
-    noAdMessage.style.display = "flex";
+      // Display a message if no ads were found
+      if (postData.length === 0) {
+        noAdMessage.style.display = "flex";
+        noAdMessageh1.textContent = "No ads found for this location";
+        product.appendChild(noAdMessage);
+      } else {
+        noAdMessage.style.display = "none";
+      }
+    });
   } else {
-    noAdMessage.style.display = "none";
+    // If a location is selected, fetch ads for that location
+    postCollection.where("postLocation", "==", selectedLocation).get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const dataFromFirebase = doc.data();
+        if (dataFromFirebase) {
+          getAllPosts(dataFromFirebase);
+        }
+      });
+
+      // Display a message if no ads were found for the selected location
+      if (postData.length === 0) {
+        noAdMessage.style.display = "flex";
+        noAdMessageh1.textContent = "No ads found for this location";
+        product.appendChild(noAdMessage);
+      } else {
+        noAdMessage.style.display = "none";
+      }
+    });
   }
 }
+
 
 function searchInputOutlineAqua() {
   searchInput.style.outlineColor = "aqua";
@@ -94,12 +120,12 @@ function showAndHideNavbarOnSmallDevices() {
   let hamburgerImage = document.querySelector('.hamb');
   hamburgerImage.src = "images/close.png";
   parentNavbar.classList.toggle("active");
+  locationList.classList.remove("show");
   const searchDiv = document.getElementById("search-div");
   if (searchDiv.style.display === "block") {
     searchDiv.style.display = "none";
   }
   if (!parentNavbar.classList.contains("active")) {
-    locationList.classList.remove("show");
     move_icon.classList.remove("rotate");
     hamburgerImage.src = "images/hamb.png";
   }
@@ -107,12 +133,16 @@ function showAndHideNavbarOnSmallDevices() {
 }
 
 window.addEventListener("load", () => {
+  // Show loader when the page is loaded
+  document.getElementById("loader").classList.remove("hidden");
   localStorage.clear();
   auth.onAuthStateChanged((user) => {
     if (user) {
       var uid = user.uid;
       loginUser = user;
       printHeader(user);
+      let showads = document.getElementById("showads");
+      showads.setAttribute("onclick", `showads('${user.uid}')`);
     } else {
       printHeader();
     }
@@ -128,44 +158,32 @@ window.addEventListener("load", () => {
         }
       }
     });
+
+    // Hide loader when data is loaded
+    document.getElementById("loader").classList.add("hidden");
   });
+
   return () => {
     unsubscribe();
   };
 });
 
 function printHeader(user) {
-  let header = document.getElementById("header");
-  let parentNavbar = document.getElementById("parentNavbar");
-  const loginWrapper = document.createElement("div");
-  loginWrapper.setAttribute("class", "login-button");
-  const loginWrapperText = document.createElement("p");
+  let loginWrapperText = document.querySelector(".loginText");
+  let loginButton = document.querySelector(".login-button");
+  const sellWrapper = document.querySelector(".sellWrapper");
+  let showAdsDiv = document.getElementById("showads");
   if (user) {
     loginWrapperText.textContent = "LogOut";
-    loginWrapper.setAttribute("onclick", "logOut()");
+    loginButton.setAttribute("onclick", "logOut()");
+    sellWrapper.setAttribute("onclick", "navigateToAdPost()");
+    showAdsDiv.style.visibility = "initial";
   } else {
     loginWrapperText.textContent = "Login";
-    loginWrapper.setAttribute("onclick", "navigateToLogin()");
+    loginButton.setAttribute("onclick", "navigateToLogin()");
+    sellWrapper.setAttribute("onclick", "navigateToLogin()");
+    showAdsDiv.style.visibility = "hidden";
   }
-  loginWrapper.appendChild(loginWrapperText);
-  const sellWrapper = document.createElement("p");
-  sellWrapper.setAttribute("class", "sell_button");
-  const sellWrapperButton = document.createElement("button");
-  const sellWrapperIcon = document.createElement("i");
-  sellWrapperIcon.setAttribute("class", "fa-regular fa-plus");
-  const sellWrapperText = document.createElement("p");
-  if (user) {
-    sellWrapperText.setAttribute("onclick", "navigateToAdPost()");
-  } else {
-    sellWrapperText.setAttribute("onclick", "navigateToLogin()");
-  }
-  sellWrapperText.textContent = "SELL";
-  sellWrapperButton.appendChild(sellWrapperIcon);
-  sellWrapperButton.appendChild(sellWrapperText);
-  sellWrapper.appendChild(sellWrapperButton);
-  parentNavbar.appendChild(loginWrapper);
-  parentNavbar.appendChild(sellWrapper);
-  header.appendChild(parentNavbar);
 }
 
 /* ___________________________________________Product________________________________________________ */
@@ -189,10 +207,10 @@ function getAllPosts(data) {
   const postInnerWrapperImage = document.createElement("img");
   if (data.postImages.length === 1) {
     postInnerWrapperImage.setAttribute("src", data?.postImages[0]);
-    postInnerWrapperImage.setAttribute("alt", data?.postImages[0]);
+    // postInnerWrapperImage.setAttribute("alt", data?.postImages[0]);
   } else {
     postInnerWrapperImage.setAttribute("src", data?.postImages);
-    postInnerWrapperImage.setAttribute("alt", data?.postImages);
+    // postInnerWrapperImage.setAttribute("alt", data?.postImages);
   }
   postInnerWrapperOne.appendChild(postInnerWrapperImage);
 
@@ -247,62 +265,145 @@ let displayedTitles = new Set(); // Set to store displayed titles
 function filterByKeyword(keyword) {
   clickedKeyword = keyword.toLowerCase(); // Store the clicked keyword
 
-  const postElements = document.querySelectorAll(".box");
+  // Clear existing posts
+  product.innerHTML = "";
+  postData = [];
+  postTitleArray = [];
 
-  postElements.forEach((postElement, index) => {
-    const postLocationElement = postElement.querySelector(".addres_data p");
-    const postTitle = postElement.querySelector("p").textContent.toLowerCase();
-    const postLocation = postLocationElement.textContent.toLowerCase();
+  const postCollection = database.collection("post");
 
-    if (
-      (selectedLocation === "" ||
-        postLocation === selectedLocation.toLowerCase()) &&
-      postTitle.includes(clickedKeyword)
-    ) {
-      postElement.style.display = "block";
+  postCollection.get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      const dataFromFirebase = doc.data();
+      if (dataFromFirebase) {
+        const postTitle = dataFromFirebase.postTitle.toLowerCase();
+        const postLocation = dataFromFirebase.postLocation.toLowerCase();
+
+        if (
+          (selectedLocation === "" || postLocation === selectedLocation.toLowerCase()) &&
+          postTitle.includes(clickedKeyword)
+        ) {
+          getAllPosts(dataFromFirebase);
+        }
+      }
+    });
+
+    // Display a message if no matching ads were found
+    if (postData.length === 0) {
+      noAdMessage.style.display = "flex";
+      noAdMessageh1.textContent = "No ads found for this location";
+      product.appendChild(noAdMessage);
     } else {
-      postElement.style.display = "none";
+      noAdMessage.style.display = "none";
     }
   });
 }
 
+// function displayAvailableKeywords() {
+//   console.log("disc availbale", postTitleArray);
+//   //  4 suggestion se ziada na aaen
+//   const searchInput = document.getElementById("search-box").value.trim();
+//   const searchDiv = document.getElementById("search-div");
+//   const ul = searchDiv.querySelector("ul");
+//   ul.innerHTML = ""; // Clear the existing li tags
+//   displayedTitles.clear(); // Clear the displayedTitles Set
+
+//   let hasAdsForSelectedLocation = false; // Flag to track if there are ads for the selected location
+//   let suggestionCount = 0; // Counter to limit suggestions to 4
+
+//   postTitleArray.forEach((title, index) => {
+//     const postElements = document.querySelectorAll(".box");
+//     if (index < postElements.length) {
+//       const postElement = postElements[index];
+//       const postLocationElement = postElement.querySelector(".addres_data p");
+//       if (postLocationElement) {
+//         const postLocation = postLocationElement.textContent.toLowerCase();
+//         if (
+//           title.toLowerCase().includes(searchInput.toLowerCase()) &&
+//           (selectedLocation === "" || postLocation === selectedLocation.toLowerCase())
+//         ) {
+//           if (!displayedTitles.has(title.toLowerCase()) && suggestionCount < 3) {
+//             const li = document.createElement("li");
+//             li.textContent = title.toLowerCase();
+//             li.onclick = () => {
+//               const searchBox = document.getElementById("search-box");
+//               searchBox.value = title.toLowerCase();
+//               filterByKeyword(title); // Pass the clicked keyword
+//               hideSearchDiv(); // Hide the search-div on li click
+//             };
+//             ul.appendChild(li);
+//             displayedTitles.add(title.toLowerCase()); // Add the title to the displayedTitles Set
+//             suggestionCount++; // Increment suggestion count
+//           }
+//           hasAdsForSelectedLocation = true;
+//         }
+//       }
+//     }
+//   });
+
+//   // If no ads are found for the selected location, display the message in the li
+//   if (!hasAdsForSelectedLocation && suggestionCount === 0) {
+//     const li = document.createElement("li");
+//     li.textContent = "No matching ads found for this location";
+//     ul.appendChild(li);
+//   }
+
+//   // Show or hide the search-div based on user input
+//   if (searchInput === "") {
+//     hideSearchDiv();
+//     // Reset the clicked keyword when hiding the search-div
+//     clickedKeyword = null;
+//   } else {
+//     showSearchDiv();
+//   }
+// }
+
+// Function to hide the search-div
+
 function displayAvailableKeywords() {
-  const searchInput = document.getElementById("search-box").value.trim();
+  const searchInput = document.getElementById("search-box").value.trim().toLowerCase(); // Convert input to lowercase
   const searchDiv = document.getElementById("search-div");
   const ul = searchDiv.querySelector("ul");
   ul.innerHTML = ""; // Clear the existing li tags
   displayedTitles.clear(); // Clear the displayedTitles Set
 
   let hasAdsForSelectedLocation = false; // Flag to track if there are ads for the selected location
+  let suggestionCount = 0; // Counter to limit suggestions to 3
 
-  // Iterate through each post title and check if it matches the keyword and selected location
-  postTitleArray.forEach((title, index) => {
-    const postElement = document.querySelectorAll(".box")[index];
-    const postLocationElement = postElement.querySelector(".addres_data p");
-    const postLocation = postLocationElement.textContent.toLowerCase();
-    if (
-      title.toLowerCase().includes(searchInput.toLowerCase()) &&
-      (selectedLocation === "" ||
-        postLocation === selectedLocation.toLowerCase())
-    ) {
-      if (!displayedTitles.has(title.toLowerCase())) {
-        const li = document.createElement("li");
-        li.textContent = title.toLowerCase();
-        li.onclick = () => {
-          const searchBox = document.getElementById("search-box");
-          searchBox.value = title.toLowerCase();
-          filterByKeyword(title); // Pass the clicked keyword
-          hideSearchDiv(); // Hide the search-div on li click
-        };
-        ul.appendChild(li);
-        displayedTitles.add(title.toLowerCase()); // Add the title to the displayedTitles Set
+  postTitleArray.forEach((title) => { // Iterate over each title in the postTitleArray
+    const titleLowerCase = title.toLowerCase(); // Convert title to lowercase for case-insensitive comparison
+    const postElements = document.querySelectorAll(".box");
+    postElements.forEach((postElement, index) => { // Iterate over each post element
+      if (index < postTitleArray.length) {
+        const postLocationElement = postElement.querySelector(".addres_data p");
+        if (postLocationElement) {
+          const postLocation = postLocationElement.textContent.toLowerCase();
+          if (
+            titleLowerCase.includes(searchInput) && // Check if the title matches the search input
+            (selectedLocation === "" || postLocation === selectedLocation.toLowerCase())
+          ) {
+            if (!displayedTitles.has(titleLowerCase) && suggestionCount < 3) {
+              const li = document.createElement("li");
+              li.textContent = title; // Display the original title, not in lowercase
+              li.onclick = () => {
+                const searchBox = document.getElementById("search-box");
+                searchBox.value = titleLowerCase; // Set the search box value to lowercase
+                filterByKeyword(titleLowerCase); // Pass the clicked keyword in lowercase
+                hideSearchDiv(); // Hide the search-div on li click
+              };
+              ul.appendChild(li);
+              displayedTitles.add(titleLowerCase); // Add the title to the displayedTitles Set
+              suggestionCount++; // Increment suggestion count
+            }
+            hasAdsForSelectedLocation = true;
+          }
+        }
       }
-      hasAdsForSelectedLocation = true;
-    }
+    });
   });
 
   // If no ads are found for the selected location, display the message in the li
-  if (!hasAdsForSelectedLocation) {
+  if (!hasAdsForSelectedLocation && suggestionCount === 0) {
     const li = document.createElement("li");
     li.textContent = "No matching ads found for this location";
     ul.appendChild(li);
@@ -318,7 +419,6 @@ function displayAvailableKeywords() {
   }
 }
 
-// Function to hide the search-div
 function hideSearchDiv() {
   const searchDiv = document.getElementById("search-div");
   searchDiv.style.display = "none";
@@ -328,4 +428,104 @@ function hideSearchDiv() {
 function showSearchDiv() {
   const searchDiv = document.getElementById("search-div");
   searchDiv.style.display = "block";
+}
+
+function showads(userId) {
+  if (userId) {
+    // Fetch ads from the database that match the user ID
+    database.collection("post").where("user_id", "==", userId).get()
+      .then((querySnapshot) => {
+        // Clear existing ads
+        product.innerHTML = "";
+        postData = [];
+        postTitleArray = [];
+        // Iterate through the fetched ads and display them
+        querySnapshot.forEach((doc) => {
+          const dataFromFirebase = doc.data();
+          if (dataFromFirebase) {
+            getAllPosts(dataFromFirebase);
+          }
+        });
+
+        // Check if ads were found for the user
+        if (postData.length === 0) {
+          // Display a message if no ads were found
+          noAdMessage.style.display = "flex";
+          noAdMessageh1.textContent = "you haven't posted any ads yet";
+          product.appendChild(noAdMessage);
+        } else {
+          noAdMessage.style.display = "none";
+        }
+        fetchData()
+      })
+      .catch((error) => {
+        console.error("Error fetching ads:", error);
+      });
+  } else {
+    console.error("User ID is undefined");
+  }
+}
+
+// Find the image element by its id
+const reloadAdsImage = document.getElementById("reloadAdsImage");
+
+// Attach an event listener to the image
+reloadAdsImage.addEventListener("click", function () {
+  let locationText = document.getElementById("text");
+  const searchDiv = document.getElementById("search-div");
+  // Clear existing ads
+  product.innerHTML = "";
+  postData = [];
+  postTitleArray = [];
+  searchInput.value = "";
+  locationText.textContent = "Select Your Location";
+  locationList.classList.remove("show");
+  selectedLocation = "";
+  searchDiv.style.display = "none";
+  // Fetch all ads from the database
+  database.collection("post").get()
+    .then((querySnapshot) => {
+      // Iterate through the fetched ads and display them
+      querySnapshot.forEach((doc) => {
+        const dataFromFirebase = doc.data();
+        if (dataFromFirebase) {
+          getAllPosts(dataFromFirebase);
+        }
+      });
+
+      // Check if any ads were found
+      if (postData.length === 0) {
+        // Display a message if no ads were found
+        noAdMessage.style.display = "flex";
+        product.appendChild(noAdMessage);
+      } else {
+        noAdMessage.style.display = "none";
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching ads:", error);
+    });
+});
+
+function fetchData() {
+  // Reset postData and postTitleArray
+  postData = [];
+  postTitleArray = [];
+  // Fetch and show all posts from Firebase
+  database.collection("post").get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const dataFromFirebase = doc.data();
+        postData.push(dataFromFirebase);
+        const postTitles = dataFromFirebase.postTitle;
+        postTitleArray.push(postTitles);
+      });
+      // Now, all data has been fetched and pushed into arrays
+      // You can perform further operations here if needed
+      console.log("All postData", postData);
+      console.log("All postTitleArray", postTitleArray);
+    })
+    .catch((error) => {
+      console.error("Error fetching ads:", error);
+    });
 }

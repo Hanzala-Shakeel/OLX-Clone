@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OLX Ad Post</title>
     <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     />
     <link
       rel="stylesheet"
@@ -25,6 +25,14 @@
       <h3>POST YOUR AD</h3>
     </div>
     <div class="container">
+      <div id="postingModal" class="modal">
+        <div class="modal-content">
+          <div class="loading">
+            <h2>Posting ad, please wait</h2>
+            <span><i></i><i></i></span>
+          </div>
+        </div>
+      </div>
       <div class="add-form">
         <div class="include-details">
           <h3>INCLUDE SOME DETAILS</h3>
@@ -121,24 +129,18 @@
           <div class="ads-location-parent">
             <div id="hidden" class="ads-location-dropdown">
               <ul>
-                <li class="bold">Choose Region</li>
+                <ol class="bold">Choose Region</ol>
                 <li onclick="select_location('Peshawar, Pakistan')">
                   Peshawar, Pakistan
                 </li>
                 <li onclick="select_location('Quetta, Pakistan')">
                   Quetta, Pakistan
                 </li>
-                <li
-                  onclick="select_location('Multan, Pakistan')"
-                >
-                  Multan
-                </li>
+                <li onclick="select_location('Multan, Pakistan')">Multan</li>
                 <li onclick="select_location('Islamabad, Pakistan')">
                   Islamabad
                 </li>
-                <li onclick="select_location('Lahore, Pakistan')">
-                  Lahore
-                </li>
+                <li onclick="select_location('Lahore, Pakistan')">Lahore</li>
                 <li onclick="select_location('Hyderabad, Pakistan')">
                   Hyderabad, Pakistan
                 </li>

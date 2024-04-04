@@ -94,8 +94,24 @@
   border: 1px solid #002f34;
 }
 
-@media screen and (max-width: 428px) {
+@media screen and (max-width: 450px) {
   .login-box {
-    width: 320px;
+    width: 90vw;
+  }
+  .login-box-img img {
+    width: 50px;
+  }
+  .login-h3 {
+    font-size: 13px;
+  }
+  .input {
+    padding: 11px 20px;
+  }
+  .forget-passowrd p {
+    font-size: 13px;
+  }
+  .login-btn {
+    padding: 10px 20px;
+    font-size: 15px;
   }
 }
