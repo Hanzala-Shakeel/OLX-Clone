@@ -371,6 +371,14 @@ function compressImage(file) {
 
 
 function postAd(e) {
+  const postLocationselect = location_box.innerHTML;
+  const allowedLocations = ['Karachi', 'Lahore', 'Islamabad', 'Rawalpindi', 'Faisalabad']; // List of allowed locations
+
+  // Check if the selected location is in the list of allowed locations
+  if (!allowedLocations.includes(postLocationselect)) {
+    swal("You cannot change the location by yourself"); // Show error message
+    return; // Exit the function without proceeding further
+  }
   // Function ka start time
   const startTime = performance.now();
 
@@ -710,3 +718,7 @@ function hidePostingModal() {
   // Hide the modal
   modal.style.display = "none";
 }
+
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
