@@ -372,8 +372,8 @@ function compressImage(file) {
 
 function postAd(e) {
   const postLocationselect = location_box.innerHTML;
-  const allowedLocations = ['Karachi', 'Lahore', 'Islamabad', 'Rawalpindi', 'Faisalabad']; // List of allowed locations
-
+  console.log(postLocationselect, "postLocationselect");
+  const allowedLocations = ['Karachi, Pakistan', 'Lahore, Pakistan', 'Islamabad, Pakistan', 'Rawalpindi, Pakistan', 'Faisalabad, Pakistan', "Peshawar, Pakistan", "Multan, Pakistan"]; // List of allowed locations
   // Check if the selected location is in the list of allowed locations
   if (!allowedLocations.includes(postLocationselect)) {
     swal("You cannot change the location by yourself"); // Show error message
