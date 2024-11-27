@@ -299,66 +299,6 @@ function filterByKeyword(keyword) {
   });
 }
 
-// function displayAvailableKeywords() {
-//   console.log("disc availbale", postTitleArray);
-//   //  4 suggestion se ziada na aaen
-//   const searchInput = document.getElementById("search-box").value.trim();
-//   const searchDiv = document.getElementById("search-div");
-//   const ul = searchDiv.querySelector("ul");
-//   ul.innerHTML = ""; // Clear the existing li tags
-//   displayedTitles.clear(); // Clear the displayedTitles Set
-
-//   let hasAdsForSelectedLocation = false; // Flag to track if there are ads for the selected location
-//   let suggestionCount = 0; // Counter to limit suggestions to 4
-
-//   postTitleArray.forEach((title, index) => {
-//     const postElements = document.querySelectorAll(".box");
-//     if (index < postElements.length) {
-//       const postElement = postElements[index];
-//       const postLocationElement = postElement.querySelector(".addres_data p");
-//       if (postLocationElement) {
-//         const postLocation = postLocationElement.textContent.toLowerCase();
-//         if (
-//           title.toLowerCase().includes(searchInput.toLowerCase()) &&
-//           (selectedLocation === "" || postLocation === selectedLocation.toLowerCase())
-//         ) {
-//           if (!displayedTitles.has(title.toLowerCase()) && suggestionCount < 3) {
-//             const li = document.createElement("li");
-//             li.textContent = title.toLowerCase();
-//             li.onclick = () => {
-//               const searchBox = document.getElementById("search-box");
-//               searchBox.value = title.toLowerCase();
-//               filterByKeyword(title); // Pass the clicked keyword
-//               hideSearchDiv(); // Hide the search-div on li click
-//             };
-//             ul.appendChild(li);
-//             displayedTitles.add(title.toLowerCase()); // Add the title to the displayedTitles Set
-//             suggestionCount++; // Increment suggestion count
-//           }
-//           hasAdsForSelectedLocation = true;
-//         }
-//       }
-//     }
-//   });
-
-//   // If no ads are found for the selected location, display the message in the li
-//   if (!hasAdsForSelectedLocation && suggestionCount === 0) {
-//     const li = document.createElement("li");
-//     li.textContent = "No matching ads found for this location";
-//     ul.appendChild(li);
-//   }
-
-//   // Show or hide the search-div based on user input
-//   if (searchInput === "") {
-//     hideSearchDiv();
-//     // Reset the clicked keyword when hiding the search-div
-//     clickedKeyword = null;
-//   } else {
-//     showSearchDiv();
-//   }
-// }
-
-// Function to hide the search-div
 
 function displayAvailableKeywords() {
   const searchInput = document.getElementById("search-box").value.trim().toLowerCase(); // Convert input to lowercase
@@ -419,6 +359,7 @@ function displayAvailableKeywords() {
   }
 }
 
+// Function to hide the search-div
 function hideSearchDiv() {
   const searchDiv = document.getElementById("search-div");
   searchDiv.style.display = "none";
