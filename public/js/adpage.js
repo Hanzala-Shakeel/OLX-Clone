@@ -127,39 +127,6 @@ function navigateToHome() {
   window.location.href = "index.html";
 }
 
-// function deleteIcon() {
-//   swal({
-//     title: "Are you sure?",
-//     text: "This action cannot be undone.",
-//     type: "warning",
-//     showCancelButton: true,
-//     confirmButtonColor: "#DD6B55",
-//     confirmButtonText: "Delete",
-//     cancelButtonText: "Cancel",
-//     closeOnConfirm: false,
-//     closeOnCancel: true
-//   }, function (isConfirmed) {
-//     if (isConfirmed) {
-//       database
-//         .collection("post")
-//         .doc(postId)
-//         .delete()
-//         .then(() => {
-//           swal({
-//             title: "Congrats!",
-//             text: "Document successfully deleted!",
-//             type: "success"
-//           }, function () {
-//             window.location.href = "index.html";
-//           });
-//         })
-//         .catch((error) => {
-//           console.error("Error removing document: ", error);
-//         });
-//     }
-//   });
-// }
-
 function deleteIcon() {
   swal({
     title: "Are you sure?",

@@ -93,11 +93,7 @@
   left: 100px;
   top: -10px;
 }
-/* @media screen and (max-width: 414px) {
-  .model-box {
-    border: none;
-  }
-} */
+
 @media screen and (max-width: 450px) {
   .container {
     max-height: 100vh;

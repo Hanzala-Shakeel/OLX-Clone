@@ -28,44 +28,44 @@ window.addEventListener("load", () => {
     } else {
       currentUser = null;
     }
-
-    getEditUserId = localStorage.getItem("postId");
-    getEditUserData = JSON.parse(localStorage.getItem("editPostData"));
-    console.log("getEditUserId", getEditUserId);
-
-    console.log("User id", user.uid);
-
-    if (getEditUserId || getEditUserData) {
-      const getCurrentPost = getEditUserData.find(
-        (postData) => postData.id == getEditUserId
-      );
-      console.log("getEditUserData", getCurrentPost);
-
-      let postTitle = document.getElementById("postTitle");
-      let postDescription = document.getElementById("postDescription");
-      let postBrand = document.getElementById("brand-box");
-      let postPrice = document.getElementById("commodityPrice");
-      let postLocation = document.getElementById("location-box");
-      let postUserName = document.getElementById("postUserName");
-      let postUserNumber = document.getElementById("postUserNumber");
-      let heading = document.querySelector(".heading h3");
-      let lastBtn = document.querySelector(".last-button button");
-
-      postTitle.value = getCurrentPost.postTitle;
-      postDescription.value = getCurrentPost.postDescription;
-      postBrand.value = getCurrentPost.postBrand;
-      postPrice.value = getCurrentPost.postPrice;
-      postLocation.innerHTML = getCurrentPost.postLocation;
-      postUserName.value = getCurrentPost.postUserName;
-      postUserNumber.value = getCurrentPost.postUserNumber;
-      heading.textContent = "EDIT YOUR AD";
-      lastBtn.textContent = "Edit Now";
-      imageCountElement.textContent = "If you're not changing the images, we will take your existing images. Otherwise, we will replace the existing images with new ones."
-      imageCountElement.style.fontSize = "15px";
-      imageCountElement.style.color = "rgb(86 189 200)";
-      imageCountElement.style.fontWeight = "bold";
-    }
   });
+
+  getEditUserId = localStorage.getItem("postId");
+  getEditUserData = JSON.parse(localStorage.getItem("editPostData"));
+  console.log("getEditUserId", getEditUserId);
+
+  // console.log("User id", user.uid);
+
+  if (getEditUserId || getEditUserData) {
+    const getCurrentPost = getEditUserData.find(
+      (postData) => postData.id == getEditUserId
+    );
+    console.log("getEditUserData", getCurrentPost);
+
+    let postTitle = document.getElementById("postTitle");
+    let postDescription = document.getElementById("postDescription");
+    let postBrand = document.getElementById("brand-box");
+    let postPrice = document.getElementById("commodityPrice");
+    let postLocation = document.getElementById("location-box");
+    let postUserName = document.getElementById("postUserName");
+    let postUserNumber = document.getElementById("postUserNumber");
+    let heading = document.querySelector(".heading h3");
+    let lastBtn = document.querySelector(".last-button button");
+
+    postTitle.value = getCurrentPost.postTitle;
+    postDescription.value = getCurrentPost.postDescription;
+    postBrand.value = getCurrentPost.postBrand;
+    postPrice.value = getCurrentPost.postPrice;
+    postLocation.innerHTML = getCurrentPost.postLocation;
+    postUserName.value = getCurrentPost.postUserName;
+    postUserNumber.value = getCurrentPost.postUserNumber;
+    heading.textContent = "EDIT YOUR AD";
+    lastBtn.textContent = "Edit Now";
+    imageCountElement.textContent = "If you're not changing the images, we will take your existing images. Otherwise, we will replace the existing images with new ones."
+    imageCountElement.style.fontSize = "15px";
+    imageCountElement.style.color = "rgb(86 189 200)";
+    imageCountElement.style.fontWeight = "bold";
+  }
 });
 
 
@@ -93,7 +93,7 @@ function navigateToHome() {
 // post ad, upload multiple images at once and edit post without updating the image functionalty
 
 function postAd(e) {
-  // showPostingModal();
+  showPostingModal();
   const postTitle = document.getElementById("postTitle");
   const postDescription = document.getElementById("postDescription");
   const postBrand = brand_box;
@@ -105,34 +105,37 @@ function postAd(e) {
 
   if (postTitle.value == "") {
     swal("Please enter post title");
+    hidePostingModal()
     return;
   }
   if (postDescription.value == "") {
     swal("Please enter post description");
+    hidePostingModal()
     return;
   }
   if (postBrand.value == "") {
     swal("Please select post brand");
+    hidePostingModal()
     return;
   }
   if (postPrice.value == "") {
     swal("Please enter post price");
+    hidePostingModal()
     return;
   }
   if (postLocation.innerHTML == "") {
     swal("Please select post location");
+    hidePostingModal()
     return;
   }
   if (postUserName.value == "") {
     swal("Please enter post host name");
+    hidePostingModal()
     return;
   }
   if (postUserNumber.value == "") {
     swal("Please enter post host number");
-    return;
-  }
-  if (!galleryImageFirst.files || galleryImageFirst.files.length === 0) {
-    swal("Please upload an image");
+    hidePostingModal()
     return;
   }
 
@@ -197,6 +200,14 @@ function postAd(e) {
   else {
     // Add mode: create a new post
     const files = galleryImageFirst.files;
+
+    // New post mode: image is required
+    if (!files || files.length === 0) {
+      swal("Please upload at least one image for your post");
+      hidePostingModal();
+      return;
+    }
+
     const imageUrls = [];
 
     for (let i = 0; i < files.length; i++) {

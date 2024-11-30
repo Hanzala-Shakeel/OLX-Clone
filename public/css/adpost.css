@@ -9,7 +9,6 @@
 .navbar {
   width: 100%;
   height: 60px;
-  /* background-color: aliceblue; */
 }
 
 .navbar img {
@@ -338,7 +337,6 @@
 
 /* Modal content */
 .modal-content {
-  /* background: #595bd4; */
   padding: 20px;
   border-radius: 10px;
   animation: slideIn 0.5s forwards; /* Slide-in animation */
@@ -361,7 +359,6 @@
 /* Loading animation */
 .loading {
   position: absolute;
-  /* width: 100px; */
   width: 250px;
   display: flex;
   justify-content: center;
@@ -445,11 +442,6 @@
   .location-input {
     font-size: 15px;
   }
-  /* .ads-location-dropdown {
-    width: 89%;
-    height: fit-content;
-    box-shadow: 0 0 10px grey;
-  } */
   .ads-location-dropdown {
     width: 84%;
     height: fit-content;
